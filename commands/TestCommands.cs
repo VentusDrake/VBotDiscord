@@ -52,11 +52,15 @@ namespace VBotDiscord.commands {
                     Title = "Congratulations! You win!",
                     Color = DiscordColor.Green
                 };
-
-            } else {
+            } else if (userCard.SelectedNumber < botCard.SelectedNumber) {
                 return new DiscordEmbedBuilder {
                     Title = "You Lost!",
                     Color = DiscordColor.Red
+                };
+            } else {
+                return new DiscordEmbedBuilder {
+                    Title = "It's a draw!",
+                    Color = DiscordColor.White
                 };
             }
         }
