@@ -1,6 +1,9 @@
-﻿using DSharpPlus.CommandsNext;
+﻿using DSharpPlus;
+using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
+using DSharpPlus.Interactivity;
+using DSharpPlus.Interactivity.Extensions;
 using VBotDiscord.other;
 
 namespace VBotDiscord.commands {
@@ -17,11 +20,11 @@ namespace VBotDiscord.commands {
 
         [Command("embed")]
         public async Task EmbedMessage(CommandContext ctx) {
-            var message = new DiscordEmbedBuilder { 
+            var message = new DiscordEmbedBuilder {
                 Title = "This is my first discord embed",
                 Color = DiscordColor.White,
-                Description = $"This command was executed by {ctx.User.Username}",                
-                Timestamp = DateTime.Now                
+                Description = $"This command was executed by {ctx.User.Username}",
+                Timestamp = DateTime.Now
             };
 
             await ctx.Channel.SendMessageAsync(embed: message);
@@ -34,7 +37,7 @@ namespace VBotDiscord.commands {
                 Title = $"Your card is {userCard.SelectedCard}",
                 Color = DiscordColor.Lilac
             };
-            await ctx.Channel.SendMessageAsync(embed: userCardEmbed);            
+            await ctx.Channel.SendMessageAsync(embed: userCardEmbed);
 
             var botCard = new CardSystem();
             var botCardEmbed = new DiscordEmbedBuilder {
@@ -63,6 +66,6 @@ namespace VBotDiscord.commands {
                     Color = DiscordColor.White
                 };
             }
-        }
+        }        
     }
 }
