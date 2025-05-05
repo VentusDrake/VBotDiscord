@@ -6,7 +6,9 @@ using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
+using DSharpPlus.SlashCommands;
 using VBotDiscord.commands;
+using VBotDiscord.commands.SlashCommands;
 using VBotDiscord.config;
 
 namespace VBotDiscord
@@ -45,10 +47,17 @@ namespace VBotDiscord
             };
 
             Commands = Client.UseCommandsNext(commandsConfig);
+
+            //Register normal commands for bot
             Commands.RegisterCommands<TestCommands>();
             Commands.RegisterCommands<InteractivityCommands>();
 
-            Commands.CommandErrored += Commands_CommandErrored;
+            //Register slash commands for bot locally using the server ID
+            //Registering slash command globally may take up to 1h to register
+            var slashCommandsConfig = Client.UseSlashCommands();
+            slashCommandsConfig.RegisterCommands<BasicSlashCommands>(517306024080834560);
+
+            Commands.CommandErrored += Commands_CommandErrored;            
 
             await Client.ConnectAsync();
             await Task.Delay(-1);
@@ -92,6 +101,12 @@ namespace VBotDiscord
         //}
 
         private static Task Client_Ready(DiscordClient sender, ReadyEventArgs args) {
+            //var appCommands = await sender.GetGuildApplicationCommandsAsync(517306024080834560);
+            //foreach (var command in appCommands) {
+            //    await sender.DeleteGuildApplicationCommandAsync(517306024080834560, command.Id);
+            //    Console.WriteLine($"Deleted global command {command.Name}");
+            //}
+
             return Task.CompletedTask;
         }
     }

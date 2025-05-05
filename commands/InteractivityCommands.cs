@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace VBotDiscord.commands {
-    internal class InteractivityCommands : BaseCommandModule {
+    public class InteractivityCommands : BaseCommandModule {
         private InteractivityExtension interactivity = Program.Client.GetInteractivity();
 
         [Command("message")]
