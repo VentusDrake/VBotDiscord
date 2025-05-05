@@ -9,8 +9,15 @@ using VBotDiscord.other;
 namespace VBotDiscord.commands {
     public class TestCommands : BaseCommandModule {
         [Command("test")]
+        [Cooldown(5, 15, CooldownBucketType.User)]
         public async Task MyFirstCommand(CommandContext ctx) {
             await ctx.Channel.SendMessageAsync($"Hello {ctx.User.Username}");
+        }
+
+        [Command("test2")]
+        [Cooldown(5, 15, CooldownBucketType.User)]
+        public async Task MySecondCommand(CommandContext ctx) {
+            await ctx.Channel.SendMessageAsync($"Hello2 {ctx.User.Username}");
         }
 
         [Command("add")]
@@ -66,6 +73,6 @@ namespace VBotDiscord.commands {
                     Color = DiscordColor.White
                 };
             }
-        }        
+        }       
     }
 }
